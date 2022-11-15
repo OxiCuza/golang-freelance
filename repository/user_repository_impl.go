@@ -12,16 +12,16 @@ type UserRepositoryImpl struct {
 }
 
 func (userRepository *UserRepositoryImpl) Save(ctx context.Context, tx *sql.Tx, user *domain.User) *domain.User {
-	query := "INSERT INTO users(id, name, email, password, is_admin) VALUES (?, ?, ?, ?, ?)"
-	_, err := tx.ExecContext(ctx, query, user.Id, user.Name, user.Email, user.Password, user.IsAdmin)
+	query := "INSERT INTO users(id, name, email, password, is_admin, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)"
+	_, err := tx.ExecContext(ctx, query, user.Id, user.Name, user.Email, user.Password, user.IsAdmin, user.CreatedAt, user.CreatedAt)
 	helper.PanicIfError(err)
 
 	return user
 }
 
 func (userRepository *UserRepositoryImpl) Update(ctx context.Context, tx *sql.Tx, user *domain.User) *domain.User {
-	query := "UPDATE users SET name = ? WHERE id = ?"
-	_, err := tx.ExecContext(ctx, query, user.Name, user.Id)
+	query := "UPDATE users SET name = ?, updated_at = ? WHERE id = ?"
+	_, err := tx.ExecContext(ctx, query, user.Name, user.UpdatedAt, user.Id)
 	helper.PanicIfError(err)
 
 	return user

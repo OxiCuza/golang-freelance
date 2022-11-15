@@ -56,6 +56,7 @@ func (service *UserServiceImpl) Update(ctx context.Context, request web.UserUpda
 	helper.PanicIfError(err)
 
 	user.Name = request.Name
+	user.UpdatedAt = time.Now()
 	user = service.UserRepository.Update(ctx, tx, user)
 
 	return helper.ToUserResponse(user)
