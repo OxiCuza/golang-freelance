@@ -1,0 +1,461 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Simple Blog Post",
+    "description": "API Spec Blog Post REST API",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http:localhost:3000/api/v1"
+    }
+  ],
+  "paths": {
+    "/users": {
+      "get": {
+        "tags": ["Users API"],
+        "security": [{
+          "BlogPostAuth": []
+        }],
+        "summary": "Get list users",
+        "responses": {
+          "200": {
+            "description": "Success get all users",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "number"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/UserGet"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Users API"],
+        "summary": "Create user",
+        "security": [{
+          "BlogPostAuth": []
+        }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserStore"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success create user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "number"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/UserStore"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}": {
+      "get": {
+        "tags": ["Users API"],
+        "security": [{
+          "BlogPostAuth": []
+        }],
+        "summary": "Get detail user",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "User ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success get detail user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "number"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/UserGet"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Users API"],
+        "security": [{
+          "BlogPostAuth": []
+        }],
+        "summary": "Update user by id",
+        "parameters": [{
+          "name": "userId",
+          "in": "path",
+          "description": "User ID"
+        }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserStore"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success update user by id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "number"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/UserGet"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Users API"],
+        "security": [{
+          "BlogPostAuth": []
+        }],
+        "summary": "Delete user by id",
+        "parameters": [{
+          "name": "userId",
+          "in": "path",
+          "description": "User ID"
+        }],
+        "responses": {
+          "200": {
+            "description": "Success delete user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "number"
+                    },
+                    "status": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/posts": {
+      "get": {
+        "tags": ["Blog Post API"],
+        "security": [{
+          "BlogPostAuth": []
+        }],
+        "summary": "Get list blog posts",
+        "responses": {
+          "200": {
+            "description": "Success get all blog posts",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "number"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/BlogPostStore"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Blog Post API"],
+        "summary": "Create blog post",
+        "security": [{
+          "BlogPostAuth": []
+        }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BlogPostGet"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success create blog post",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "number"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/BlogPostGet"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/posts/{postId}": {
+      "get": {
+        "tags": ["Blog Post API"],
+        "security": [{
+          "BlogPostAuth": []
+        }],
+        "summary": "Get detail blog post",
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "description": "Blog Post ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success get detail blog post",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "number"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/BlogPostStore"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Blog Post API"],
+        "security": [{
+          "BlogPostAuth": []
+        }],
+        "summary": "Update blog post by id",
+        "parameters": [{
+          "name": "postId",
+          "in": "path",
+          "description": "Blog Post ID"
+        }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BlogPostGet"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success update blog post by id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "number"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/BlogPostStore"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Blog Post API"],
+        "security": [{
+          "BlogPostAuth": []
+        }],
+        "summary": "Delete blog post by id",
+        "parameters": [{
+          "name": "postId",
+          "in": "path",
+          "description": "Blog Post ID"
+        }],
+        "responses": {
+          "200": {
+            "description": "Success delete blog post",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "number"
+                    },
+                    "status": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "BlogPostAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-Key",
+        "description": "Authentication for Blog Post API"
+      }
+    },
+    "schemas": {
+      "UserStore": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          }
+        }
+      },
+      "UserGet": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          }
+        }
+      },
+      "BlogPostStore": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "user_id": {
+            "type": "string"
+          }
+        }
+      },
+      "BlogPostGet": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "user_id": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
