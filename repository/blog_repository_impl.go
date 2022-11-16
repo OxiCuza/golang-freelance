@@ -3,16 +3,18 @@ package repository
 import (
 	"context"
 	"database/sql"
+	"encoding/json"
 	"errors"
 	"golang-freelance/helper"
 	"golang-freelance/model/domain"
 )
 
 type BlogRepositoryImpl struct {
+	RedisClient helper.Redis
 }
 
-func NewBlogRepository() BlogRepository {
-	return &BlogRepositoryImpl{}
+func NewBlogRepository(redisClient helper.Redis) BlogRepository {
+	return &BlogRepositoryImpl{RedisClient: redisClient}
 }
 
 func (repository *BlogRepositoryImpl) Save(ctx context.Context, tx *sql.Tx, blog *domain.BlogPost) *domain.BlogPost {
@@ -54,17 +56,29 @@ func (repository *BlogRepositoryImpl) FindById(ctx context.Context, tx *sql.Tx, 
 }
 
 func (repository *BlogRepositoryImpl) FindAll(ctx context.Context, tx *sql.Tx) *[]domain.BlogPost {
-	query := "SELECT id, title, content, user_id FROM blog_posts"
-	rows, err := tx.QueryContext(ctx, query)
-	helper.PanicIfError(err)
-	defer rows.Close()
-
 	var blogs []domain.BlogPost
-	for rows.Next() {
-		blog := domain.BlogPost{}
-		rows.Scan(&blog.Id, &blog.Title, &blog.Content, &blog.UserId)
-		blogs = append(blogs, blog)
+
+	result, err := repository.RedisClient.Get(ctx, "blog")
+	if err != nil {
+		query := "SELECT id, title, content, user_id FROM blog_posts"
+		rows, err := tx.QueryContext(ctx, query)
+		helper.PanicIfError(err)
+		defer rows.Close()
+
+		for rows.Next() {
+			blog := domain.BlogPost{}
+			rows.Scan(&blog.Id, &blog.Title, &blog.Content, &blog.UserId)
+			blogs = append(blogs, blog)
+		}
+
+		err = repository.RedisClient.Set(ctx, "blog", blogs)
+		helper.PanicIfError(err)
+
+		return &blogs
 	}
+
+	err = json.Unmarshal([]byte(result), &blogs)
+	helper.PanicIfError(err)
 
 	return &blogs
 }

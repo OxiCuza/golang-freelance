@@ -13,7 +13,7 @@ Content-Type: application/json
 }
 
 ### GET USER BY ID
-GET http://localhost:3000/api/v1/users/c9dce067-8ae7-4ca6-abcb-2ff1e218fa85
+GET http://localhost:3000/api/v1/users/b7324f7b-8c29-440e-85b1-9ec111eb77e5
 Accept: application/json
 
 ### UPDATE USER BY ID

@@ -8,13 +8,13 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "title": "Title Dummy",
+  "title": "Title Dummy 123123",
   "content": "Et dolor ut alias laudantium qui iusto. Laboriosam sed dignissimos perferendis id. Sed architecto consequatur facilis eum non aliquam tempore. Ut doloribus non dolore et qui praesentium.Sed architecto nemo sunt voluptas tenetur. Dolorem voluptatem aut et eius. Necessitatibus ut similique harum. Eligendi vero adipisci quae amet non facere. Sint sint quisquam ipsum quam. Possimus iure totam non voluptates et. Esse in impedit soluta perferendis porro. Ut maxime et quos non fugiat eos. Velit dolore nostrum quia itaque. Veniam laboriosam dolor nostrum est. Ut non in voluptatem quae. Nihil qui est reprehenderit culpa quasi. Nulla dolor saepe aut velit temporibus unde. Deleniti est deleniti voluptatem nostrum nesciunt possimus doloremque.",
-  "user_id": "b7324f7b-8c29-440e-85b1-9ec111eb77e"
+  "user_id": "b7324f7b-8c29-440e-85b1-9ec111eb77e5"
 }
 
 ### GET BLOG POST BY ID
-GET http://localhost:3000/api/v1/posts/8897b399-0a8a-48ad-bc56-164b3ecb0638
+GET http://localhost:3000/api/v1/posts/0c36aea5-86f1-4c94-ba12-5fb833ed8877
 Accept: application/json
 
 ### UPDATE BLOG POST BY ID
@@ -28,5 +28,5 @@ Content-Type: application/json
 }
 
 ### DELETE BLOG POST BY ID
-DELETE http://localhost:3000/api/v1/posts/8897b399-0a8a-48ad-bc56-164b3ecb0638
+DELETE http://localhost:3000/api/v1/posts/c5519b96-c429-4beb-b667-687844679630
 Accept: application/json

@@ -19,8 +19,9 @@ func main() {
 	userService := service.NewUserService(userRepository, db, validate)
 	userController := controller.NewUserControllerImpl(userService)
 
-	blogRepository := repository.NewBlogRepository()
-	blogService := service.NewBlogService(blogRepository, db, validate)
+	rdb := helper.InitRedis()
+	blogRepository := repository.NewBlogRepository(rdb)
+	blogService := service.NewBlogService(blogRepository, userRepository, db, validate)
 	blogController := controller.NewBlogController(blogService)
 
 	router := app.NewRouter(userController, blogController)

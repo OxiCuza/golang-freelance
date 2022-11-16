@@ -20,8 +20,8 @@ type BlogServiceImpl struct {
 	Validate       *validator.Validate
 }
 
-func NewBlogService(blogRepository repository.BlogRepository, db *sql.DB, validate *validator.Validate) BlogService {
-	return &BlogServiceImpl{BlogRepository: blogRepository, db: db, Validate: validate}
+func NewBlogService(blogRepository repository.BlogRepository, userRepository repository.UserRepository, db *sql.DB, validate *validator.Validate) BlogService {
+	return &BlogServiceImpl{BlogRepository: blogRepository, UserRepository: userRepository, db: db, Validate: validate}
 }
 
 func (service *BlogServiceImpl) Save(ctx context.Context, request web.BlogCreateRequest) web.BlogResponse {

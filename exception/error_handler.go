@@ -8,6 +8,7 @@ import (
 )
 
 func ErrorHandler(writer http.ResponseWriter, request *http.Request, err interface{}) {
+
 	if validationErrors(writer, request, err) {
 		return
 	}
