@@ -11,6 +11,10 @@ import (
 type UserRepositoryImpl struct {
 }
 
+func NewUserRepository() UserRepository {
+	return &UserRepositoryImpl{}
+}
+
 func (userRepository *UserRepositoryImpl) Save(ctx context.Context, tx *sql.Tx, user *domain.User) *domain.User {
 	query := "INSERT INTO users(id, name, email, password, is_admin, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)"
 	_, err := tx.ExecContext(ctx, query, user.Id, user.Name, user.Email, user.Password, user.IsAdmin, user.CreatedAt, user.CreatedAt)
@@ -38,6 +42,7 @@ func (userRepository *UserRepositoryImpl) FindById(ctx context.Context, tx *sql.
 	query := "SELECT id, name, email FROM users WHERE id = ?"
 	rows, err := tx.QueryContext(ctx, query, userId)
 	helper.PanicIfError(err)
+	defer rows.Close()
 
 	user := domain.User{}
 	if rows.Next() {
@@ -53,6 +58,7 @@ func (userRepository *UserRepositoryImpl) FindAll(ctx context.Context, tx *sql.T
 	query := "SELECT id, name, email FROM users"
 	rows, err := tx.QueryContext(ctx, query)
 	helper.PanicIfError(err)
+	defer rows.Close()
 
 	var users []domain.User
 	for rows.Next() {
