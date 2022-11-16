@@ -35,7 +35,6 @@ func (userRepository *UserRepositoryImpl) Delete(ctx context.Context, tx *sql.Tx
 	query := "DELETE FROM users WHERE id = ?"
 	_, err := tx.ExecContext(ctx, query, user.Id)
 	helper.PanicIfError(err)
-
 }
 
 func (userRepository *UserRepositoryImpl) FindById(ctx context.Context, tx *sql.Tx, userId string) (*domain.User, error) {
