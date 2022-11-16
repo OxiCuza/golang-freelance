@@ -35,6 +35,7 @@ func (controller *BlogControllerImpl) Update(writer http.ResponseWriter, request
 	blogRequest := web.BlogUpdateRequest{}
 	helper.ReadFromRequest(request, &blogRequest)
 
+	blogRequest.Id = params.ByName("postId")
 	blogResponse := controller.BlogService.Update(request.Context(), blogRequest)
 
 	jsonResponse := web.JSONResponse{
