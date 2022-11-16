@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"github.com/go-playground/validator/v10"
-	"github.com/julienschmidt/httprouter"
 	"golang-freelance/app"
 	"golang-freelance/controller"
 	"golang-freelance/helper"
@@ -24,21 +23,7 @@ func main() {
 	blogService := service.NewBlogService(blogRepository, db, validate)
 	blogController := controller.NewBlogController(blogService)
 
-	router := httprouter.New()
-
-	// FEATURE USERS
-	router.GET("/api/v1/users", userController.FindAll)
-	router.POST("/api/v1/users", userController.Create)
-	router.GET("/api/v1/users/:userId", userController.FindById)
-	router.PUT("/api/v1/users/:userId", userController.Update)
-	router.DELETE("/api/v1/users/:userId", userController.Delete)
-
-	// FEATURE BLOG POSTS
-	router.GET("/api/v1/posts", blogController.FindAll)
-	router.POST("/api/v1/posts", blogController.Create)
-	router.GET("/api/v1/posts/:postId", blogController.FindById)
-	router.PUT("/api/v1/posts/:postId", blogController.Update)
-	router.DELETE("/api/v1/posts/:postId", blogController.Delete)
+	router := app.NewRouter(userController, blogController)
 
 	address := fmt.Sprintf("localhost:%s", app.EnvVariable("APP_PORT"))
 	server := http.Server{
