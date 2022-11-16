@@ -1,0 +1,30 @@
+### GET ALL USERS
+GET http://localhost:3000/api/v1/users
+Accept: application/json
+
+### CREATE USER
+POST http://localhost:3000/api/v1/users
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "User Dummy",
+  "email": "dummy.email@gmail.com"
+}
+
+### GET USER BY ID
+GET http://localhost:3000/api/v1/users/c9dce067-8ae7-4ca6-abcb-2ff1e218fa85
+Accept: application/json
+
+### UPDATE USER BY ID
+PUT http://localhost:3000/api/v1/users/c9dce067-8ae7-4ca6-abcb-2ff1e218fa85
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "Changed Dummy User"
+}
+
+### DELETE USER BY ID
+DELETE http://localhost:3000/api/v1/users/c9dce067-8ae7-4ca6-abcb-2ff1e218fa85
+Accept: application/json
