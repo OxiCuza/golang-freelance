@@ -12,6 +12,10 @@ type BlogControllerImpl struct {
 	BlogService service.BlogService
 }
 
+func NewBlogController(blogService service.BlogService) BlogController {
+	return &BlogControllerImpl{BlogService: blogService}
+}
+
 func (controller *BlogControllerImpl) Create(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	blogRequest := web.BlogCreateRequest{}
 	helper.ReadFromRequest(request, &blogRequest)

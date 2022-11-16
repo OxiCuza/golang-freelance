@@ -11,6 +11,10 @@ import (
 type BlogRepositoryImpl struct {
 }
 
+func NewBlogRepository() BlogRepository {
+	return &BlogRepositoryImpl{}
+}
+
 func (repository *BlogRepositoryImpl) Save(ctx context.Context, tx *sql.Tx, blog *domain.BlogPost) *domain.BlogPost {
 	query := "INSERT INTO blog_posts(id, title, content, user_id, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)"
 	_, err := tx.ExecContext(ctx, query, blog.Id, blog.Title, blog.Content, blog.UserId, blog.CreatedAt, blog.UpdatedAt)
