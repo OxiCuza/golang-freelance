@@ -21,3 +21,21 @@ func ToUserResponses(users *[]domain.User) []web.UserResponse {
 
 	return userResponses
 }
+
+func ToBlogPostResponse(blog *domain.BlogPost) web.BlogResponse {
+	return web.BlogResponse{
+		Id:      blog.Id,
+		Title:   blog.Title,
+		Content: blog.Content,
+		UserId:  blog.UserId,
+	}
+}
+
+func ToBlogPostResponses(blogs *[]domain.BlogPost) []web.BlogResponse {
+	var blogResponses []web.BlogResponse
+	for _, blog := range *blogs {
+		blogResponses = append(blogResponses, ToBlogPostResponse(&blog))
+	}
+
+	return blogResponses
+}

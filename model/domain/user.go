@@ -1,9 +1,13 @@
 package domain
 
+import "time"
+
 type User struct {
-	BaseModel
-	Name     string
-	Email    string
-	Password string
-	IsAdmin  bool
+	Id        string
+	Name      string
+	Email     string
+	Password  string
+	IsAdmin   bool
+	CreatedAt time.Time
+	UpdatedAt time.Time
 }
