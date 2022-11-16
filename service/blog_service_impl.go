@@ -5,6 +5,7 @@ import (
 	"database/sql"
 	"github.com/go-playground/validator/v10"
 	"github.com/google/uuid"
+	"golang-freelance/exception"
 	"golang-freelance/helper"
 	"golang-freelance/model/domain"
 	"golang-freelance/model/web"
@@ -53,7 +54,9 @@ func (service *BlogServiceImpl) Update(ctx context.Context, request web.BlogUpda
 	defer helper.CommitOrRollback(tx)
 
 	blog, err := service.BlogRepository.FindById(ctx, tx, request.Id)
-	helper.PanicIfError(err)
+	if err != nil {
+		panic(exception.NewNotFoundError(err.Error()))
+	}
 
 	blog.Title = request.Title
 	blog.Content = request.Content
@@ -70,7 +73,9 @@ func (service *BlogServiceImpl) Delete(ctx context.Context, blogId string) {
 	defer helper.CommitOrRollback(tx)
 
 	blog, err := service.BlogRepository.FindById(ctx, tx, blogId)
-	helper.PanicIfError(err)
+	if err != nil {
+		panic(exception.NewNotFoundError(err.Error()))
+	}
 
 	service.BlogRepository.Delete(ctx, tx, blog)
 }
@@ -81,7 +86,9 @@ func (service *BlogServiceImpl) FindById(ctx context.Context, blogId string) web
 	defer helper.CommitOrRollback(tx)
 
 	blog, err := service.BlogRepository.FindById(ctx, tx, blogId)
-	helper.PanicIfError(err)
+	if err != nil {
+		panic(exception.NewNotFoundError(err.Error()))
+	}
 
 	return helper.ToBlogPostResponse(blog)
 }

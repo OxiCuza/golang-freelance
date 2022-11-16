@@ -3,6 +3,7 @@ package app
 import (
 	"github.com/julienschmidt/httprouter"
 	"golang-freelance/controller"
+	"golang-freelance/exception"
 )
 
 func NewRouter(userController controller.UserController, blogController controller.BlogController) *httprouter.Router {
@@ -21,6 +22,9 @@ func NewRouter(userController controller.UserController, blogController controll
 	router.GET("/api/v1/posts/:postId", blogController.FindById)
 	router.PUT("/api/v1/posts/:postId", blogController.Update)
 	router.DELETE("/api/v1/posts/:postId", blogController.Delete)
+
+	// ERROR HANDLING
+	router.PanicHandler = exception.ErrorHandler
 
 	return router
 }

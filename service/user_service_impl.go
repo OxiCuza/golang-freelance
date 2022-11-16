@@ -5,6 +5,7 @@ import (
 	"database/sql"
 	"github.com/go-playground/validator/v10"
 	"github.com/google/uuid"
+	"golang-freelance/exception"
 	"golang-freelance/helper"
 	"golang-freelance/model/domain"
 	"golang-freelance/model/web"
@@ -57,7 +58,9 @@ func (service *UserServiceImpl) Update(ctx context.Context, request web.UserUpda
 	defer helper.CommitOrRollback(tx)
 
 	user, err := service.UserRepository.FindById(ctx, tx, request.Id)
-	helper.PanicIfError(err)
+	if err != nil {
+		panic(exception.NewNotFoundError(err.Error()))
+	}
 
 	user.Name = request.Name
 	user.UpdatedAt = time.Now()
@@ -72,7 +75,9 @@ func (service *UserServiceImpl) Delete(ctx context.Context, userId string) {
 	defer helper.CommitOrRollback(tx)
 
 	user, err := service.UserRepository.FindById(ctx, tx, userId)
-	helper.PanicIfError(err)
+	if err != nil {
+		panic(exception.NewNotFoundError(err.Error()))
+	}
 
 	service.UserRepository.Delete(ctx, tx, user)
 }
@@ -83,7 +88,9 @@ func (service *UserServiceImpl) FindById(ctx context.Context, userId string) web
 	defer helper.CommitOrRollback(tx)
 
 	user, err := service.UserRepository.FindById(ctx, tx, userId)
-	helper.PanicIfError(err)
+	if err != nil {
+		panic(exception.NewNotFoundError(err.Error()))
+	}
 
 	return helper.ToUserResponse(user)
 }
