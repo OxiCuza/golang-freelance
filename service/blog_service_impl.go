@@ -15,6 +15,7 @@ import (
 
 type BlogServiceImpl struct {
 	BlogRepository repository.BlogRepository
+	UserRepository repository.UserRepository
 	db             *sql.DB
 	Validate       *validator.Validate
 }
@@ -31,11 +32,16 @@ func (service *BlogServiceImpl) Save(ctx context.Context, request web.BlogCreate
 	helper.PanicIfError(err)
 	defer helper.CommitOrRollback(tx)
 
+	user, err := service.UserRepository.FindById(ctx, tx, request.UserId)
+	if err != nil {
+		panic(exception.NewNotFoundError(err.Error()))
+	}
+
 	blog := &domain.BlogPost{
 		Id:        uuid.NewString(),
 		Title:     request.Title,
 		Content:   request.Content,
-		UserId:    request.UserId,
+		UserId:    user.Id,
 		CreatedAt: time.Now(),
 		UpdatedAt: time.Now(),
 	}
