@@ -44,7 +44,6 @@ kemudahan developer untuk menambahkan fungsionalitas baru ke dalam aplikasi.
 
 * package [Go](https://go.dev/learn/)
 * database MySQL / MariaDB
-* import schema (docs/db.sql) to your DBMS
 
 ### Installation
 
