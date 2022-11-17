@@ -2,8 +2,6 @@ CREATE TABLE `users` (
   `id` varchar(255) PRIMARY KEY,
   `name` varchar(255),
   `email` varchar(255),
-  `password` varchar(255),
-  `is_admin` bool,
   `created_at` timestamp,
   `updated_at` timestamp
 );

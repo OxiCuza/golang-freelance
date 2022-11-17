@@ -1,0 +1,42 @@
+### GET ALL BLOG POSTS
+GET http://localhost:3000/api/v1/posts
+Accept: application/json
+X-API-Key: 31UOY+zPB4qMFNBbWntF9I75+dl43RvsUmONnwy7C80=
+
+
+### CREATE BLOG POST
+POST http://localhost:3000/api/v1/posts
+Accept: application/json
+Content-Type: application/json
+X-API-Key: 31UOY+zPB4qMFNBbWntF9I75+dl43RvsUmONnwy7C80=
+
+{
+  "title": "Title Dummy 123123",
+  "content": "Et dolor ut alias laudantium qui iusto. Laboriosam sed dignissimos perferendis id. Sed architecto consequatur facilis eum non aliquam tempore. Ut doloribus non dolore et qui praesentium.Sed architecto nemo sunt voluptas tenetur. Dolorem voluptatem aut et eius. Necessitatibus ut similique harum. Eligendi vero adipisci quae amet non facere. Sint sint quisquam ipsum quam. Possimus iure totam non voluptates et. Esse in impedit soluta perferendis porro. Ut maxime et quos non fugiat eos. Velit dolore nostrum quia itaque. Veniam laboriosam dolor nostrum est. Ut non in voluptatem quae. Nihil qui est reprehenderit culpa quasi. Nulla dolor saepe aut velit temporibus unde. Deleniti est deleniti voluptatem nostrum nesciunt possimus doloremque.",
+  "user_id": "b7324f7b-8c29-440e-85b1-9ec111eb77e5"
+}
+
+
+### GET BLOG POST BY ID
+GET http://localhost:3000/api/v1/posts/0c36aea5-86f1-4c94-ba12-5fb833ed8877
+Accept: application/json
+X-API-Key: 31UOY+zPB4qMFNBbWntF9I75+dl43RvsUmONnwy7C80=
+
+
+### UPDATE BLOG POST BY ID
+PUT http://localhost:3000/api/v1/posts/0b083667-d8d3-4610-96e1-bf8eedc6c904
+Accept: application/json
+Content-Type: application/json
+X-API-Key: 31UOY+zPB4qMFNBbWntF9I75+dl43RvsUmONnwy7C80=
+
+
+{
+  "title": "Changed Title 2",
+  "Content": "Changed Content to long ago with days"
+}
+
+
+### DELETE BLOG POST BY ID
+DELETE http://localhost:3000/api/v1/posts/d219b522-06c5-43b9-a48e-4e09a4482642
+X-API-Key: 31UOY+zPB4qMFNBbWntF9I75+dl43RvsUmONnwy7C80=
+Accept: application/json

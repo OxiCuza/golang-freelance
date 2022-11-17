@@ -2,10 +2,11 @@ package domain
 
 import "time"
 
-type User struct {
+type BlogPost struct {
 	Id        string
-	Name      string
-	Email     string
+	Title     string
+	Content   string
+	UserId    string
 	CreatedAt time.Time
 	UpdatedAt time.Time
 }
