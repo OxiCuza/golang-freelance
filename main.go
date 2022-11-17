@@ -6,8 +6,10 @@ import (
 	"golang-freelance/app"
 	"golang-freelance/controller"
 	"golang-freelance/helper"
+	"golang-freelance/middleware"
 	"golang-freelance/repository"
 	"golang-freelance/service"
+	"log"
 	"net/http"
 )
 
@@ -20,6 +22,8 @@ func main() {
 	userController := controller.NewUserControllerImpl(userService)
 
 	rdb := helper.InitRedis()
+	log.Println("redis client initialized")
+
 	blogRepository := repository.NewBlogRepository(rdb)
 	blogService := service.NewBlogService(blogRepository, userRepository, db, validate)
 	blogController := controller.NewBlogController(blogService)
@@ -29,9 +33,10 @@ func main() {
 	address := fmt.Sprintf("localhost:%s", app.EnvVariable("APP_PORT"))
 	server := http.Server{
 		Addr:    address,
-		Handler: router,
+		Handler: middleware.NewAuthMiddleware(router),
 	}
 
+	log.Println("server started at", address)
 	err := server.ListenAndServe()
 	helper.PanicIfError(err)
 }
