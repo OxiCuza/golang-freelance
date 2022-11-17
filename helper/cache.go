@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/go-redis/redis/v8"
 	"github.com/joho/godotenv"
+	"log"
 	"os"
 	"time"
 )
@@ -51,7 +52,7 @@ func (r *redisClient) Set(ctx context.Context, key string, value interface{}) er
 func (r *redisClient) Get(ctx context.Context, key string) (string, error) {
 	response, err := r.rdb.Get(ctx, key).Result()
 	if err == redis.Nil {
-		fmt.Println("key does not exist")
+		log.Println("key does not exist")
 		return "", err
 	} else if err != nil {
 		fmt.Println(err)
