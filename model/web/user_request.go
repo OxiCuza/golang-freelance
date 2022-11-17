@@ -1,11 +1,11 @@
 package web
 
 type UserCreateRequest struct {
-	Name  string `validate:"required,max=20,min=3"`
-	Email string `validate:"required,email"`
+	Name  string `json:"name" validate:"required,max=20,min=3"`
+	Email string `json:"email" validate:"required,email"`
 }
 
 type UserUpdateRequest struct {
-	Id   string `validate:"required"`
-	Name string `validate:"required,max=20,min=3"`
+	Id   string `json:"id" validate:"required"`
+	Name string `json:"name" validate:"required,max=20,min=3"`
 }

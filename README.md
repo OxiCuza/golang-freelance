@@ -4,7 +4,7 @@
 
 <!-- PROJECT LOGO -->
 <br />
-<div align="center">
+<div align="center" id="readme-top">
   <a href="https://go.dev/">
     <img src="https://go.dev/blog/go-brand/Go-Logo/PNG/Go-Logo_LightBlue.png" alt="Logo" width="200" height="200">
   </a>
@@ -44,6 +44,7 @@ kemudahan developer untuk menambahkan fungsionalitas baru ke dalam aplikasi.
 
 * package [Go](https://go.dev/learn/)
 * database MySQL / MariaDB
+* import schema (doc/db.sql) to your DBMS
 
 ### Installation
 
@@ -59,8 +60,8 @@ kemudahan developer untuk menambahkan fungsionalitas baru ke dalam aplikasi.
    ```sh
    cp .env.example .env
    ```
-4. Make sure to setup Database environment and REDIS environment correctly
-5. Env for API KEY
+4. Make sure to set up DB env and REDIS env correctly
+5. Example env value for API KEY
    ```sh
    X-API-Key=31UOY+zPB4qMFNBbWntF9I75+dl43RvsUmONnwy7C80=
    ```
@@ -77,6 +78,15 @@ kemudahan developer untuk menambahkan fungsionalitas baru ke dalam aplikasi.
 ## API Documentation
 
 https://app.swaggerhub.com/apis/OxiCuza/simple-blog-post/1.0.0
+
+example usage :
+* Hit endpoint /users with method GET
+   ```shell
+   curl -X 'GET' \
+     'localhost://3000/api/v1/users' \
+     -H 'accept: application/json' \
+     -H 'X-API-Key: 31UOY+zPB4qMFNBbWntF9I75+dl43RvsUmONnwy7C80='
+   ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
