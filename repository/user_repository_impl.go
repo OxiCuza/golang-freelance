@@ -16,8 +16,8 @@ func NewUserRepository() UserRepository {
 }
 
 func (userRepository *UserRepositoryImpl) Save(ctx context.Context, tx *sql.Tx, user *domain.User) *domain.User {
-	query := "INSERT INTO users(id, name, email, password, is_admin, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)"
-	_, err := tx.ExecContext(ctx, query, user.Id, user.Name, user.Email, user.Password, user.IsAdmin, user.CreatedAt, user.CreatedAt)
+	query := "INSERT INTO users(id, name, email, created_at, updated_at) VALUES (?, ?, ?, ?, ?)"
+	_, err := tx.ExecContext(ctx, query, user.Id, user.Name, user.Email, user.CreatedAt, user.CreatedAt)
 	helper.PanicIfError(err)
 
 	return user

@@ -33,17 +33,11 @@ func (service *UserServiceImpl) Save(ctx context.Context, request web.UserCreate
 
 	user := &domain.User{
 		Id:        uuid.NewString(),
-		IsAdmin:   false,
+		Name:      request.Name,
+		Email:     request.Email,
 		CreatedAt: time.Now(),
 		UpdatedAt: time.Now(),
 	}
-
-	user.Name = request.Name
-	user.Email = request.Email
-	password, err := helper.GeneratePassword("default")
-	helper.PanicIfError(err)
-
-	user.Password = password
 	user = service.UserRepository.Save(ctx, tx, user)
 
 	return helper.ToUserResponse(user)

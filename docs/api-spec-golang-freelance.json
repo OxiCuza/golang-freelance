@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "http:localhost:3000/api/v1"
+      "url": "localhost:3000/api/v1"
     }
   ],
   "paths": {
@@ -75,7 +75,7 @@
                       "type": "string"
                     },
                     "data": {
-                      "$ref": "#/components/schemas/UserStore"
+                      "$ref": "#/components/schemas/UserGet"
                     }
                   }
                 }
@@ -123,7 +123,7 @@
           }
         }
       },
-      "put": {
+      "patch": {
         "tags": ["Users API"],
         "security": [{
           "BlogPostAuth": []
@@ -138,7 +138,12 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UserStore"
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                }
               }
             }
           }
@@ -265,49 +270,6 @@
                     },
                     "data": {
                       "$ref": "#/components/schemas/BlogPostGet"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/posts/user/{userId}": {
-      "get": {
-        "tags": ["Blog Post API"],
-        "security": [{
-          "BlogPostAuth": []
-        }],
-        "summary": "Get list blog posts by user id",
-        "parameters": [
-          {
-            "name": "userId",
-            "required": true,
-            "in": "path",
-            "description": "User ID"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success get all blog posts by user id",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "code": {
-                      "type": "number"
-                    },
-                    "status": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/BlogPostStore"
-                      }
                     }
                   }
                 }

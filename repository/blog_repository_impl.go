@@ -7,6 +7,7 @@ import (
 	"errors"
 	"golang-freelance/helper"
 	"golang-freelance/model/domain"
+	"log"
 )
 
 type BlogRepositoryImpl struct {
@@ -74,8 +75,12 @@ func (repository *BlogRepositoryImpl) FindAll(ctx context.Context, tx *sql.Tx) *
 		err = repository.RedisClient.Set(ctx, "blog", blogs)
 		helper.PanicIfError(err)
 
+		log.Println("set operation success")
+
 		return &blogs
 	}
+
+	log.Println("get operation success")
 
 	err = json.Unmarshal([]byte(result), &blogs)
 	helper.PanicIfError(err)
