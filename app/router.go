@@ -13,7 +13,7 @@ func NewRouter(userController controller.UserController, blogController controll
 	router.GET("/api/v1/users", userController.FindAll)
 	router.POST("/api/v1/users", userController.Create)
 	router.GET("/api/v1/users/:userId", userController.FindById)
-	router.PUT("/api/v1/users/:userId", userController.Update)
+	router.PATCH("/api/v1/users/:userId", userController.Update)
 	router.DELETE("/api/v1/users/:userId", userController.Delete)
 
 	// FEATURE BLOG POSTS
